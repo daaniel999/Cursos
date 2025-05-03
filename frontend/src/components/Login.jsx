@@ -64,7 +64,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit">Iniciar Sesión</button>
       </form>
     </div>
   );
