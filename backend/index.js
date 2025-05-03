@@ -5,11 +5,12 @@ const usuariosRoutes = require('./routes/usuarios');
 const grupoRoutes = require('./routes/grupos');
 const estudiantesRoutes = require('./routes/estudiantes');
 const sexosRoutes = require('./routes/sexos');
+const cursosRoutes = require('./routes/cursos');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use('/api/cursos', cursosRoutes);
 app.use('/api', usuariosRoutes);
 app.use('/api/estudiantes', estudiantesRoutes);
 app.use('/api/sexos', sexosRoutes);
