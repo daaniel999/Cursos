@@ -1,32 +1,27 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import authService from '../services/authService'; 
 
 const Login = () => {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
-    try {
-      const response = await axios.post('http://localhost:3000/api/login', {
-        usuario,
-        contrasena
-      });
 
-      if (response.data.autorizado) {
+    try {
+      const data = await authService.login(usuario, contrasena);
+
+      if (data.autorizado) {
         Swal.fire({
           title: 'Éxito',
           text: 'Bienvenido!',
           icon: 'success',
-
-         
         }).then(() => {
-          // Redirigir a otra página o cambiar el estado de autenticación
+          navigate('/');
         });
-
-
       } else {
         Swal.fire({
           title: 'Error',
@@ -34,10 +29,10 @@ const Login = () => {
           icon: 'error',
         });
       }
-    } catch {
+    } catch (error) {
       Swal.fire({
         title: 'Error',
-        text: 'Ocurrió un error en la autenticación',
+        text: error.message,
         icon: 'error',
       });
     }
