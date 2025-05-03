@@ -3,12 +3,18 @@ const cors = require('cors');
 const app = express();
 const usuariosRoutes = require('./routes/usuarios');
 
+const estudiantesRoutes = require('./routes/estudiantes');
+const sexosRoutes = require('./routes/sexos');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', usuariosRoutes);
+app.use('/api/estudiantes', estudiantesRoutes);
+app.use('/api/sexos', sexosRoutes);
 
-app.listen(3000, () => {
-  console.log('Servidor backend en el puerto 3000');
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
