@@ -6,6 +6,9 @@ import Home from './components/Home';
 import Estudiantes from './components/Estudiantes';
 import Grupos from './components/Grupos';
 import Cursos from './components/Curso';
+import CursosI from './components/CursosI';
+import GruposI from './components/GruposI';
+import InscripcionI from './components/InscripcionI';
 
 function App() {
   return (
@@ -16,8 +19,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="estudiantes" element={<Estudiantes />} />
           <Route path="grupos" element={<Grupos />} />
-          <Route path="Cursos" element={<Cursos />} />
-
+          <Route path="cursos" element={<Cursos />} />
+          <Route path="inscripciones" element={<InscripcionI />} />
+          <Route path="gruposi" element={<GruposI />} />
+          <Route path="cursosi" element={<CursosI />} />
         </Route>
       </Routes>
     </Router>
@@ -25,3 +30,4 @@ function App() {
 }
 
 export default App;
+
