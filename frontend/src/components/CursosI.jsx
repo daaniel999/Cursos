@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Modal, Button, Table } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
 
-const CursosI = ({ grupoId, show, onClose, onCursoSelect }) => {
+const CursosI = () => {
+  const { grupoId } = useParams();
   const [cursos, setCursos] = useState([]);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (grupoId) {
       axios.get(`http://localhost:3000/api/cursos/${grupoId}`)
@@ -17,35 +20,30 @@ const CursosI = ({ grupoId, show, onClose, onCursoSelect }) => {
     }
   }, [grupoId]);
 
+  const handleCursoSelect = (cursoId) => {
+    navigate(`/cursos/${cursoId}/inscripciones`);
+  };
+
   return (
-    <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Cursos del Grupo {grupoId}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Nombre del Curso</th>
-              <th>Descripción</th>
+    <div>
+      <h2>Cursos del Grupo {grupoId}</h2>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Nombre del Curso</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cursos.map(curso => (
+            <tr key={curso.id} onClick={() => handleCursoSelect(curso.id)}>
+              <td>{curso.nombre}</td>
+              <td>{curso.descripcion}</td>
             </tr>
-          </thead>
-          <tbody>
-            {cursos.map(curso => (
-              <tr key={curso.id} onClick={() => onCursoSelect(curso.id)}>
-                <td>{curso.nombre}</td>
-                <td>{curso.descripcion}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cerrar
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

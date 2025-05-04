@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 
-const GruposI = ({ onGrupoSelect }) => {
+const GruposI = () => {
   const [grupos, setGrupos] = useState([]);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios.get('http://localhost:3000/api/grupos')
       .then(response => {
@@ -16,7 +18,7 @@ const GruposI = ({ onGrupoSelect }) => {
   }, []);
 
   const handleClick = (grupoId) => {
-    onGrupoSelect(grupoId);
+    navigate(`/grupos/${grupoId}/cursos`);
   };
 
   return (

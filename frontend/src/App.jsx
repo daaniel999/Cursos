@@ -6,8 +6,8 @@ import Home from './components/Home';
 import Estudiantes from './components/Estudiantes';
 import Grupos from './components/Grupos';
 import Cursos from './components/Curso';
-import CursosI from './components/CursosI';
 import GruposI from './components/GruposI';
+import CursosI from './components/CursosI';
 import InscripcionI from './components/InscripcionI';
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
           <Route path="estudiantes" element={<Estudiantes />} />
           <Route path="grupos" element={<Grupos />} />
           <Route path="cursos" element={<Cursos />} />
-          <Route path="inscripciones" element={<InscripcionI />} />
-          <Route path="gruposi" element={<GruposI />} />
-          <Route path="cursosi" element={<CursosI />} />
+          <Route path="grupos/:grupoId" element={<GruposI />} />
+          <Route path="grupos/:grupoId/cursos" element={<CursosI />} />
+          <Route path="cursos/:cursoId/inscripciones" element={<InscripcionI />} />
         </Route>
       </Routes>
     </Router>
@@ -30,4 +30,3 @@ function App() {
 }
 
 export default App;
-

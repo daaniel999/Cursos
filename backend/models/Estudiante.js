@@ -1,9 +1,5 @@
 const db = require('../config/db');
-
 const Estudiante = {
-  
-
-
   getAll: () => {
     return new Promise((resolve, reject) => {
       db.query(`
